@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Countries</title>
+    <style>
+      .container {
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center; margin-top: 20px">
+      <h1>WORLD COUNTRIES LIST</h1>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 10px">
+      <p>Total Number of Countries: 193</p>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: 10px">
+      <p>30 Days of JavaScript: DOM - Day 2 | Author: Asabeneh Yetayeh</p>
+    </div>
+    <div
+      class="country-list"
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      "
+    ></div>
+
+    <script>
+      const countryList = document.querySelector(".country-list");
+
+      fetch("https://restcountries.com/v3.1/all")
+        .then((response) => response.json())
+        .then((data) => {
+          displayCountries(data);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+
+      function displayCountries(countries) {
+        countries.forEach((country) => {
+          const countryElement = document.createElement("div");
+          countryElement.textContent = country.name.common;
+          countryElement.classList.add("container");
+          countryList.appendChild(countryElement);
+        });
+      }
+    </script>
+  </body>
+</html>
